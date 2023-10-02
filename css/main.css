@@ -1,43 +1,51 @@
-*{
-    padding: 0;
-    margin: 0;
+* {
+  padding: 0;
+  margin: 0;
+}
+html {
+  background-color: black;
 }
 header {
-  text-align: center;
-  background-color: black;
+  margin-top: 2rem;
+  line-height: 40px;
+  padding: 15px;
+  margin-left: 40px;
   color: white;
-  height:10vh;
-
+  height: 10vh;
+  border: solid salmon 2px;
+  display: inline-block;
+  border-radius: 40px;
 }
 
-
 .container {
+  height: max-content;
   margin-top: 20px;
   display: flex;
   width: 700px;
-
-  justify-content: space-evenly;
-  align-items: flex-start;
+  justify-content: flex-start;
   flex-wrap: wrap;
   font-size: 10px;
   text-align: center;
-  gap: 3px;
+  gap: 10px;
+  align-items: stretch;
 }
 .mark {
-  background-color: red;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: rgba(215, 59, 200, 0.675);
   color: lightgoldenrodyellow;
-  border: solid 1px pink;
+  border: solid 5px pink;
+  border-radius: 20px;
   height: fit-content;
   padding: 10px;
-
   display: flex;
   flex-direction: column;
   align-content: center;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   text-align: center;
   width: 100px;
-  text-wrap: stable;
+
+  flex-wrap: wrap;
 }
 .minibox {
   height: fit-content;
@@ -46,11 +54,12 @@ header {
   display: flex;
   flex-direction: column;
   align-content: center;
-  justify-content: space-around;
+  align-items: stretch;
+  border-radius: 20px;
+
   align-items: center;
   text-align: center;
   width: 100px;
-  text-wrap: stable;
 }
 
 .imgSrc {
@@ -58,20 +67,22 @@ header {
   height: 90px;
 }
 .bigContainer {
-    height: 90vh;
   background-color: black;
   gap: 20px;
   display: flex;
-  justify-content: space-evenly;
+  gap: 100px;
 }
 .favContainer {
-  margin-top: 50px;
+  border-radius: 30px;
+  margin-left: 40px;
+  padding: 10px;
+  width: 280px;
+  margin-top: 10px;
   background-color: pink;
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 250px;
+  align-items: flex-start;
 }
 
 .favBox {
@@ -80,11 +91,4 @@ header {
   flex-wrap: wrap;
   justify-content: center;
 }
-footer {
-  
-height: 5vh;
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} 
+

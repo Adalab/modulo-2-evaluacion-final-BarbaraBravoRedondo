@@ -6,13 +6,13 @@ const results = document.querySelector('.js-results-series');
 const aside = document.querySelector('.js-aside-series');
 const favorites = document.querySelector('.js-favorite-series');
 const url = '//api.tvmaze.com/search/shows?q=';
-
+const resetBtn = document.querySelector('.js-resetBtn');
 // Datos
 let favoritesList = [];
 let seriesList = [];
 
 // Función que recoja la búsqueda a la API de las series
-
+loadFromLocalStorage();
 function getSeries() {
   const nameSerie = inputName.value;
   fetch(url + nameSerie)
@@ -28,14 +28,15 @@ function getSeries() {
 // Plantilla de HTML de cada búsqueda de la serie
 function renderSerie(serie) {
   let html = '';
+
   html += `<article class="js-serieBox minibox" id="${serie.show.id}">`;
-  
+
   html += `<img class="imgSrc" src="${
     serie.show.image
       ? serie.show.image.medium
       : 'https://via.placeholder.com/70x90/ffffff/666666/?text=TV'
   }" alt="${serie.show.name}" title="${serie.show.name}" />`;
-  
+
   html += `<h2>${serie.show.name}</h2>`;
   html += `</article>`;
   return html;
@@ -58,32 +59,36 @@ function handleClickBtn(event) {
 
 // Función para renderizar favoritos
 function renderFavorites() {
- favorites.innerHTML="";// Limpiamos la lista de favoritos antes de renderizar
+  favorites.innerHTML = ''; // Limpiamos la lista de favoritos antes de renderizar
   for (const favSerie of favoritesList) {
     favorites.innerHTML += renderSerie(favSerie);
   }
 }
 
-// Función que maneja lo que ocurre al dar clic a cada serie de la búsqueda
+// Función que maneja lo que ocurre al dar clic en las series
 function handleClickSerie(event) {
   const idSerie = parseInt(event.currentTarget.id);
-  event.currentTarget.classList.toggle('minibox')
-  event.currentTarget.classList.toggle('mark');
-  
+
   // Ya teniendo el id del artículo que se hizo clic, añadimos a favoritos
   const seriefound = seriesList.find((serie) => serie.show.id === idSerie);
-  const positionFav = favoritesList.findIndex((serie) => serie.show.id === idSerie);
+  const positionFav = favoritesList.findIndex(
+    (serie) => serie.show.id === idSerie
+  );
   if (positionFav === -1) {
-   favoritesList.push(seriefound);
-   console.log(seriefound)
-    
+    favoritesList.push(seriefound);
+    event.currentTarget.classList.remove('minibox');
+    event.currentTarget.classList.add('mark');
+
+    console.log(seriefound);
   } else {
-   favoritesList.splice(positionFav, 1);
+    favoritesList.splice(positionFav, 1);
+    event.currentTarget.classList.remove('mark');
+    event.currentTarget.classList.add('minibox');
   }
-console.log(favoritesList);
+  console.log(favoritesList);
 
   renderFavorites();
- localStorage.setItem('favorites', JSON.stringify(favoritesList));
+  localStorage.setItem('favorites', JSON.stringify(favoritesList));
 }
 
 // Función para agregar eventos a los artículos que contienen las series con un bucle, ya que no sabemos cuántos resultados hay
@@ -94,17 +99,33 @@ function addEventstoseries() {
   }
 }
 function getInfofromLocalStorage() {
-  const result = JSON.parse(localStorage.getItem("favorites"));
+  const result = JSON.parse(localStorage.getItem('favorites'));
   if (result === null) {
     return [];
   } else {
-    favorites = result;
+    favoritesList = result;
     renderFavorites();
 
+    return favoritesList;
+  }
+}
 
-    return favorites;
-  }}
+// Cargar favoritos almacenados en localStorage cuando se carga la página
+
+function loadFromLocalStorage() {
+  const storedFavorites = localStorage.getItem('favorites');
+  if (storedFavorites) {
+    favoritesList = JSON.parse(storedFavorites);
+    renderFavorites();
+  }
+}
+
+function handleClickResetBtn(event) {
+  event.preventDefault();
+  favorites.innerHTML = ''; // Dejamos el results en blanco para que a la hora de realizar n
+  localStorage.removeItem('favorites');
+}
 
 // Eventos
 btnSrc.addEventListener('click', handleClickBtn);
-
+resetBtn.addEventListener('click', handleClickResetBtn);
