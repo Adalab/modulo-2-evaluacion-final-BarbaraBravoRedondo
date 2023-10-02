@@ -19,7 +19,7 @@ function getSeries() {
     .then((response) => response.json())
     .then((infoSeries) => {
       seriesList = infoSeries;
-      console.log(infoSeries);
+
       // Llamar función que las pinta en HTML
       renderSerieList();
     });
@@ -78,14 +78,11 @@ function handleClickSerie(event) {
     favoritesList.push(seriefound);
     event.currentTarget.classList.remove('minibox');
     event.currentTarget.classList.add('mark');
-
-    console.log(seriefound);
   } else {
     favoritesList.splice(positionFav, 1);
     event.currentTarget.classList.remove('mark');
     event.currentTarget.classList.add('minibox');
   }
-  console.log(favoritesList);
 
   renderFavorites();
   localStorage.setItem('favorites', JSON.stringify(favoritesList));
