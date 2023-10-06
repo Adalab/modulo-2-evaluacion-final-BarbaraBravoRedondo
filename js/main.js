@@ -79,7 +79,7 @@ function renderFavorite(favSerie) {
   }" alt="${favSerie.show.name}" title="${favSerie.show.name}" />`;
 
   html += `<h2>${favSerie.show.name}</h2>`;
-  html += `<span class="js-bin"><img src="../images/bolsa.png" alt="Borrar" class="binBag"></span>`;
+  html += `<span class="js-bin"><img  src="../images/bolsa.png" alt="Borrar" class="binBag"></span>`;
   html += `</article>`;
   return html;
 }
