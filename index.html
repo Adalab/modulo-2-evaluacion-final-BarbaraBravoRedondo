@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/main.css" />
+
     <title>Buscador de Series TV</title>
   </head>
   <body>
     <header>
       <h1>Buscador de series:</h1>
 
-      <form class="js-form-series" action="">
+      <form class="js-form-series form" action="">
         <input
           class="js-input-serie"
           type="text"
@@ -19,17 +20,20 @@
           placeholder="Ej:Friends"
         />
         <button class="js-btn-src">Buscar</button>
+     
       </form>
     </header>
     <main class="bigContainer">
-      <div class="js-aside-series favContainer">
+      <div class="js-box-series favContainer">
         <h2>Mis series favoritas:</h2>
         <div class="js-favorite-series favBox"></div>
-        <button class="js-resetBtn deleteBtn" type="button">
+        <button class="js-resetBtn deleteBtn deletedAll" type="button">
           Borrar Favoritos
         </button>
       </div>
-      <div class="js-results-series container"></div>
+      <div class="js-results-series container">
+      
+      </div>
     </main>
 
     <script src="./js/main.js"></script>

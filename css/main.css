@@ -1,88 +1,95 @@
+
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
+
 html {
   background-color: black;
 }
+
 header {
-  margin-top: 2rem;
-  line-height: 40px;
-  padding: 15px;
-  margin-left: 40px;
+margin:20px;
+font-size: 10px;;
+  padding: 5px;
   color: white;
   height: 10vh;
   border: solid salmon 2px;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 40px;
+
+  text-align: center;
+
 }
 
 .container {
-  height: max-content;
   margin-top: 20px;
   display: flex;
-  width: 700px;
-  justify-content: flex-start;
   flex-wrap: wrap;
   font-size: 10px;
   text-align: center;
   gap: 10px;
   align-items: stretch;
+  justify-content: center;
+  width: 70%;
 }
-.mark {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+/* Estilos para las series en favoritos */
+.mark,
+.minibox {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
   background-color: rgba(215, 59, 200, 0.675);
   color: lightgoldenrodyellow;
   border: solid 5px pink;
   border-radius: 20px;
-  height: fit-content;
-  padding: 10px;
+  height: 220px;
+  width: 150px;
+  padding:20px;
   display: flex;
   flex-direction: column;
-  align-content: center;
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 100px;
-
-  flex-wrap: wrap;
+  font-size: 0.5rem;
 }
+
 .minibox {
-  height: fit-content;
-  padding: 10px;
   background-color: pink;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items: stretch;
-  border-radius: 20px;
+  color:black;
 
-  align-items: center;
-  text-align: center;
-  width: 100px;
 }
-
+.binBag{
+  width: 30px;
+  height: 30px;
+}
 .imgSrc {
   width: 70px;
   height: 90px;
 }
+
 .bigContainer {
   background-color: black;
   gap: 20px;
   display: flex;
-  gap: 100px;
+  width: 100vw;
+  justify-content:flex-start;
+  align-items: flex-start; /* Espacio entre los contenedores */
 }
+
 .favContainer {
-  border-radius: 30px;
-  margin-left: 40px;
   padding: 10px;
-  width: 280px;
-  margin-top: 10px;
+  border-radius: 30px;
+  margin: 10px;
+  width: 30%;
   background-color: pink;
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .favBox {
@@ -91,4 +98,7 @@ header {
   flex-wrap: wrap;
   justify-content: center;
 }
+.deletedAll{
+  margin:20px;
 
+}

@@ -1,18 +1,22 @@
 'use strict';
+
 const inputName = document.querySelector('.js-input-serie');
 const btnSrc = document.querySelector('.js-btn-src');
 const form = document.querySelector('.js-form-series');
 const results = document.querySelector('.js-results-series');
-const aside = document.querySelector('.js-aside-series');
+const box = document.querySelector('.js-box-series');
 const favorites = document.querySelector('.js-favorite-series');
 const url = '//api.tvmaze.com/search/shows?q=';
 const resetBtn = document.querySelector('.js-resetBtn');
+const boxserie = document.querySelector('.js-serieBox');
+
 // Datos
 let favoritesList = [];
 let seriesList = [];
 
 // Función que recoja la búsqueda a la API de las series
 loadFromLocalStorage();
+
 function getSeries() {
   const nameSerie = inputName.value;
   fetch(url + nameSerie)
@@ -28,8 +32,14 @@ function getSeries() {
 // Plantilla de HTML de cada búsqueda de la serie
 function renderSerie(serie) {
   let html = '';
-
-  html += `<article class="js-serieBox minibox" id="${serie.show.id}">`;
+  if (
+    favoritesList.findIndex((favSerie) => favSerie.show.id === serie.show.id) !==
+    -1
+  ) {
+    html += `<article class="js-serieBox mark" id="${serie.show.id}">`;
+  } else {
+    html += `<article class="js-serieBox minibox" id="${serie.show.id}">`;
+  }
 
   html += `<img class="imgSrc" src="${
     serie.show.image
@@ -38,6 +48,7 @@ function renderSerie(serie) {
   }" alt="${serie.show.name}" title="${serie.show.name}" />`;
 
   html += `<h2>${serie.show.name}</h2>`;
+  
   html += `</article>`;
   return html;
 }
@@ -57,11 +68,27 @@ function handleClickBtn(event) {
   getSeries();
 }
 
+function renderFavorite(favSerie) {
+  let html = '';
+  html += `<article class="js-serieBox mark" id="${favSerie.show.id}">`;
+
+  html += `<img class="imgSrc" src="${
+    favSerie.show.image
+      ? favSerie.show.image.medium
+      : 'https://via.placeholder.com/70x90/ffffff/666666/?text=TV'
+  }" alt="${favSerie.show.name}" title="${favSerie.show.name}" />`;
+
+  html += `<h2>${favSerie.show.name}</h2>`;
+  html += `<span class="js-bin"><img src="../images/bolsa.png" alt="Borrar" class="binBag"></span>`;
+  html += `</article>`;
+  return html;
+}
+
 // Función para renderizar favoritos
-function renderFavorites() {
+function renderFavoritesList() {
   favorites.innerHTML = ''; // Limpiamos la lista de favoritos antes de renderizar
   for (const favSerie of favoritesList) {
-    favorites.innerHTML += renderSerie(favSerie);
+    favorites.innerHTML += renderFavorite(favSerie);
   }
 }
 
@@ -76,15 +103,15 @@ function handleClickSerie(event) {
   );
   if (positionFav === -1) {
     favoritesList.push(seriefound);
-    event.currentTarget.classList.remove('minibox');
     event.currentTarget.classList.add('mark');
+    event.currentTarget.classList.remove('minibox');
   } else {
     favoritesList.splice(positionFav, 1);
     event.currentTarget.classList.remove('mark');
     event.currentTarget.classList.add('minibox');
   }
 
-  renderFavorites();
+  renderFavoritesList();
   localStorage.setItem('favorites', JSON.stringify(favoritesList));
 }
 
@@ -95,32 +122,54 @@ function addEventstoseries() {
     article.addEventListener('click', handleClickSerie);
   }
 }
+
 function getInfofromLocalStorage() {
   const result = JSON.parse(localStorage.getItem('favorites'));
   if (result === null) {
     return [];
   } else {
     favoritesList = result;
-    renderFavorites();
-
+    renderFavoritesList();
     return favoritesList;
   }
 }
 
 // Cargar favoritos almacenados en localStorage cuando se carga la página
-
 function loadFromLocalStorage() {
   const storedFavorites = localStorage.getItem('favorites');
   if (storedFavorites) {
     favoritesList = JSON.parse(storedFavorites);
-    renderFavorites();
+    renderFavoritesList();
   }
 }
 
+function handleClickDeleteOne(event) {
+  const binElement = event.target.closest('.js-bin');
+  if (binElement) {
+    const idFavClicked = parseInt(binElement.parentElement.id);
+    const indexFav = favoritesList.findIndex(
+      (item) => item.show.id === idFavClicked
+    );
+    if (indexFav !== -1) {
+      favoritesList.splice(indexFav, 1);
+      renderSerieList();
+      renderFavoritesList();
+      localStorage.setItem('favorites', JSON.stringify(favoritesList)); // Actualiza la lista de favoritos en la interfaz
+    }
+  }
+}
+
+// Asigna el evento clic a la lista de favoritos
+favorites.addEventListener('click', handleClickDeleteOne);
+
 function handleClickResetBtn(event) {
   event.preventDefault();
-  favorites.innerHTML = ''; // Dejamos el results en blanco para que a la hora de realizar n
+  favoritesList = []
+  favorites.innerHTML = '';
+
+  // Dejamos el results en blanco para que a la hora de realizar n
   localStorage.removeItem('favorites');
+  renderSerieList();
 }
 
 // Eventos
