@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-html {
+body {
   background-color: black;
 }
 
@@ -34,14 +34,14 @@ form {
   border-radius: 50px;
   background-color: black;
   color: hotpink;
-  padding:5px;
+  padding: 5px;
   font-family: pacific;
-  border:hotpink solid 2px;
-  cursor:grab;
+  border: hotpink solid 2px;
+  cursor: grab;
 }
-.btn:hover{
-background:white;
-color:black;
+.btn:hover {
+  background: white;
+  color: black;
 }
 
 header {
@@ -67,7 +67,7 @@ header {
 
 .container {
   height: max-content;
-  margin-top: 20px;
+  margin-top: 5px;
   display: flex;
   flex-wrap: wrap;
   font-size: 10px;
@@ -75,8 +75,10 @@ header {
   gap: 10px;
   align-items: stretch;
   justify-content: center;
-  width: max-content;
+  width: 70vw;
   align-self: stretch;
+  color:white;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 /* Estilos para las series en favoritos */
@@ -87,7 +89,7 @@ header {
   color: rgba(94, 2, 51, 0.904);
   border: solid 5px rgb(242, 16, 136);
   border-radius: 20px;
-  width: 130px;
+  width: 100px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -123,34 +125,46 @@ header {
   justify-content: flex-start;
   align-items: flex-start; /* Espacio entre los contenedores */
 }
-
+.titleFav{
+  padding:10px;
+  font-size: 0.8rem;}
 .favContainer {
   gap: 10px;
   font-size: 0.8rem;
-  padding: 10px;
   border-radius: 30px;
   margin: 10px;
-  width: 50vw;
+  padding:6px;
+  width: 30vw;
   background-color: pink;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .favBox {
-  font-size: 10px;
+  font-size: 0.6rem;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  width: 70px;
-  gap: 10px;
-  align-self: center;
+ align-content: center;
+  width: 5rem;
+  gap: 8px;
+
+  height: fit-content;
+ 
 }
 
-.favBox .imgSrc {
+.imgFav {
   border: solid white 2px;
-  width: max-content;
+  width: 2rem;
 }
 
+.bin {
+  height: 20px;
+  width: 20px;
+}
 
+.msg {
+  color: white;
+}

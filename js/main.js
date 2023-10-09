@@ -9,6 +9,7 @@ const favorites = document.querySelector('.js-favorite-series');
 const url = '//api.tvmaze.com/search/shows?q=';
 const resetBtn = document.querySelector('.js-resetBtn');
 const boxserie = document.querySelector('.js-serieBox');
+const msgError=document.querySelector('.js-errorMsg');
 
 // Datos
 let favoritesList = [];
@@ -23,9 +24,13 @@ function getSeries() {
     .then((response) => response.json())
     .then((infoSeries) => {
       seriesList = infoSeries;
+      if(seriesList.length > 0) {renderSerieList();}
+      else{
+    results.innerHTML='Ups!No encontramos esa serie';}
+    console.log(msgError.innerHTML);
 
       // Llamar función que las pinta en HTML
-      renderSerieList();
+
     });
 }
 
@@ -70,16 +75,16 @@ function handleClickBtn(event) {
 
 function renderFavorite(favSerie) {
   let html = '';
-  html += `<article class="js-serieBox mark" id="${favSerie.show.id}">`;
+  html += `<article class="js-favBox mark favBox" id="${favSerie.show.id}">`;
 
-  html += `<img class="imgSrc" src="${
+  html += `<img class="imgFav" src="${
     favSerie.show.image
       ? favSerie.show.image.medium
       : 'https://via.placeholder.com/70x90/ffffff/666666/?text=TV'
   }" alt="${favSerie.show.name}" title="${favSerie.show.name}" />`;
 
   html += `<h2>${favSerie.show.name}</h2>`;
-  html += `<span class="js-bin"><img  src="../images/basura.png" alt="Borrar" class="binBag"></span>`;
+  html += `<span class="js-bin "><img class="bin" src="./images/basura.png" alt="Borrar" class="binBag"></span>`;
   html += `</article>`;
   return html;
 }

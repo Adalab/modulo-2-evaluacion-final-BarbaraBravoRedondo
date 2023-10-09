@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/main.css" />
+ 
 
     <title>Buscador de Series TV</title>
   </head>
@@ -26,13 +27,14 @@
     </header>
     <main class="bigContainer">
       <div class="js-box-series favContainer">
-        <h2>Mis series favoritas:</h2>
+        <h2 class="titleFav">Mis series favoritas:</h2>
         <div class="js-favorite-series favBox"></div>
-        <button class="js-resetBtn deleteBtn deletedAll btn" type="button">
+        <button class="js-resetBtn  btn" type="button">
           Borrar Favoritos
         </button>
       </div>
       <div class="js-results-series container">
+        <p class="js-errorMsg msg"></p>
       
       </div>
     </main>
